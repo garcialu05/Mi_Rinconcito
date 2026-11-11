@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi Rinconcito</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Quicksand:wght@500;600;700&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="hero wrap">
+<span class="spark" aria-hidden="true">✨</span><span class="spark" aria-hidden="true">🌸</span><span class="spark" aria-hidden="true">🎀</span><span class="spark" aria-hidden="true">💖</span>
+<span class="date" id="date"></span>
+<h1>Mi<br><i>Rinconcito</i></h1>
+<p>Tu día, bonito y a tu ritmo. Apunta lo importante, cuídate y celebra lo que logras.</p>
+<a class="btn" href="#hoy">Empezar mi día</a>
+</header>
+
+<main class="wrap" id="hoy">
+<div class="grid">
+<section class="card c1" aria-labelledby="h-mood">
+<h2 id="h-mood">¿Cómo te sientes?</h2>
+<p class="sub">Elige una carita, sin presión.</p>
+<div class="moods" id="moods"></div>
+<p id="moodMsg" class="hand" aria-live="polite"></p>
+</section>
+
+<section class="card c2" aria-labelledby="h-habits">
+<h2 id="h-habits">Mimos de hoy</h2>
+<p class="sub">Toca los que ya hiciste.</p>
+<div class="habits" id="habits"></div>
+<p class="hint" id="habitCount"></p>
+</section>
+
+<section class="card wide" aria-labelledby="h-todo">
+<h2 id="h-todo">Mi lista de hoy</h2>
+<p class="sub">Escribe una tarea y toca + para agregarla. Se guarda en este dispositivo.</p>
+<form class="add" id="addForm">
+<input id="newTask" placeholder="Ej: terminar mi tarea de inglés" aria-label="Nueva tarea" maxlength="80">
+<button type="submit" aria-label="Agregar tarea">+</button>
+</form>
+<ul id="tasks"></ul>
+<div class="bar" role="progressbar" aria-label="Progreso de tareas" aria-valuemin="0" aria-valuemax="100" id="barBox"><i id="bar"></i></div>
+<p class="hint" id="taskCount"></p>
+</section>
+
+<section class="card wide c3 q" aria-labelledby="h-q">
+<h2 id="h-q" class="hand" style="font-size:28px">Una frase para ti</h2>
+<blockquote id="quote">Toca el botón para recibir tu frase del día.</blockquote>
+<button class="btn" id="qBtn" type="button">Dame una frase</button>
+</section>
+</div>
+</main>
+<footer>Hecho con mucho cariño ✿ Mi Rinconcito</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

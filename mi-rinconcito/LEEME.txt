@@ -1,0 +1,24 @@
+MI RINCONCITO - CÓMO EDITARLO
+
+ARCHIVOS
+  index.html     Textos y estructura
+  css/style.css  Colores y diseño
+  js/main.js     Lo que hace la página (mimos, lista de tareas, frases)
+
+CÓMO VERLO
+  Abre index.html con doble clic en tu navegador.
+  Necesitas internet para que se carguen las tipografías.
+
+CÓMO CAMBIAR LOS COLORES
+  En css/style.css, al inicio, están las variables:
+    --pink (rosa)  --lilac (lila)  --butter (amarillo suave)  --mint (menta)  --bg (fondo)
+
+CÓMO CAMBIAR LAS FRASES, LOS ÁNIMOS Y LOS MIMOS
+  En js/main.js, al inicio, están las listas:
+    MOODS   las caritas y su mensaje
+    HABITS  los 6 mimos de hoy
+    QUOTES  las frases bonitas
+  Cambia el texto entre comillas y guarda.
+
+SUBIRLO A INTERNET
+  Sube toda la carpeta a Netlify, GitHub Pages o similar.

@@ -1,0 +1,18 @@
+var MOODS=[["🌸","Feliz","Qué bonito. Guarda este momento y compártelo con alguien."],["😌","Tranquila","La calma también es un logro. Disfrútala."],["😴","Cansada","Hoy toca ir despacio. Una cosa a la vez es suficiente."],["🥺","Sensible","Está bien sentir. Un té y un respiro profundo ayudan."],["💪","Con energía","¡A aprovecharla! Empieza por lo que más te emociona."]];
+var HABITS=[["💧","Tomar agua"],["🧖‍♀️","Skincare"],["📖","Leer un poco"],["🚶‍♀️","Caminar"],["🧘‍♀️","Estirarme"],["🌙","Dormir temprano"]];
+var QUOTES=["Vas a tu ritmo, y eso está perfecto.","Lo que hoy practicas, mañana se vuelve tu superpoder.","Eres capaz de cosas que aún no imaginas.","Descansar también es avanzar.","Brillar no significa hacerlo todo, sino hacerlo con cariño.","Cada pequeño paso cuenta.","Tu curiosidad te llevará lejos.","Hoy es un buen día para empezar algo bonito.","No tienes que ser perfecta para ser increíble.","Confía en todo lo que ya has logrado."];
+var KEY="petal-planner-v1",today=new Date().toISOString().slice(0,10);
+var S={day:today,mood:null,habits:[],tasks:[]};
+try{var r=JSON.parse(localStorage.getItem(KEY));if(r&&r.tasks){S=r;if(S.day!==today){S.day=today;S.mood=null;S.habits=[]}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(i){return document.getElementById(i)}
+var d=new Date().toLocaleDateString("es",{weekday:"long",day:"numeric",month:"long"});
+$("date").textContent="Hoy es "+d;
+function renderMoods(){var b=$("moods");b.textContent="";MOODS.forEach(function(m,i){var x=document.createElement("button");x.type="button";x.textContent=m[0]+" "+m[1];x.setAttribute("aria-pressed",S.mood===i);x.onclick=function(){S.mood=i;save();renderMoods()};b.appendChild(x)});$("moodMsg").textContent=S.mood===null?"":MOODS[S.mood][2]}
+function renderHabits(){var b=$("habits");b.textContent="";HABITS.forEach(function(h,i){var x=document.createElement("button");x.type="button";var on=S.habits.indexOf(i)>-1;x.setAttribute("aria-pressed",on);x.textContent=h[0]+" "+h[1];x.onclick=function(){var k=S.habits.indexOf(i);if(k>-1)S.habits.splice(k,1);else S.habits.push(i);save();renderHabits()};b.appendChild(x)});var n=S.habits.length;$("habitCount").textContent=n===HABITS.length?"¡Lo lograste todo! Eres lo máximo 💖":n+" de "+HABITS.length+" mimos hechos"}
+function renderTasks(){var u=$("tasks");u.textContent="";S.tasks.forEach(function(t,i){var li=document.createElement("li");li.className="t"+(t.d?" done":"");var c=document.createElement("input");c.type="checkbox";c.checked=t.d;c.setAttribute("aria-label",t.t);c.onchange=function(){t.d=c.checked;save();renderTasks()};var s=document.createElement("span");s.textContent=t.t;var x=document.createElement("button");x.type="button";x.textContent="✕";x.setAttribute("aria-label","Borrar tarea");x.onclick=function(){S.tasks.splice(i,1);save();renderTasks()};li.append(c,s,x);u.appendChild(li)});
+var n=S.tasks.length,k=S.tasks.filter(function(t){return t.d}).length,p=n?Math.round(k/n*100):0;$("bar").style.width=p+"%";$("barBox").setAttribute("aria-valuenow",p);
+$("taskCount").textContent=n===0?"Tu lista está vacía. Agrega tu primera tarea ✿":k===n?"¡Todo listo! Mereces un descansito 🎀":k+" de "+n+" tareas hechas"}
+$("addForm").onsubmit=function(e){e.preventDefault();var v=$("newTask").value.trim();if(!v)return;S.tasks.push({t:v,d:false});$("newTask").value="";save();renderTasks()};
+var last=-1;$("qBtn").onclick=function(){var i;do{i=Math.floor(Math.random()*QUOTES.length)}while(i===last);last=i;$("quote").textContent="“"+QUOTES[i]+"”"};
+renderMoods();renderHabits();renderTasks();
